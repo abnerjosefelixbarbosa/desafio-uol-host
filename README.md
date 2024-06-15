@@ -2,4 +2,4 @@
 
 ## about
 
-Desafio técnico uol host.
+Desafio uol host.
