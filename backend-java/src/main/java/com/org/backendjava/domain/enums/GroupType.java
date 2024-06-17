@@ -1,4 +1,4 @@
-package com.org.backendjava.enums;
+package com.org.backendjava.domain.enums;
 
 public enum GroupType {
 	AVENGER("AVENGER"), JUSTICE_LEAGUE("JUSTICE_LEAGUE");
