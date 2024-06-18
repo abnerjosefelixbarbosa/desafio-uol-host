@@ -1,11 +1,11 @@
 package com.org.backendjava.domain.enums;
 
-public enum GroupType {
+public enum GroupTypeDomain {
 	AVENGER("AVENGER"), JUSTICE_LEAGUE("JUSTICE_LEAGUE");
 	
 	private String type;
 
-	private GroupType(String type) {
+	private GroupTypeDomain(String type) {
 		this.type = type;
 	}
 

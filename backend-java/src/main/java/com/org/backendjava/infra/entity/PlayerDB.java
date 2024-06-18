@@ -2,7 +2,8 @@ package com.org.backendjava.infra.entity;
 
 
 
-import com.org.backendjava.domain.enums.GroupType;
+import com.org.backendjava.domain.dto.RegisterPlayerDto;
+import com.org.backendjava.infra.enums.GroupTypeDB;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "player_tb")
-public class Player {
+public class PlayerDB {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
@@ -29,18 +30,25 @@ public class Player {
 	private String codeName;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private GroupType playerGroup;
+	private GroupTypeDB playerGroup;
 	
-	public Player() {
+	public PlayerDB() {
 	}
 
-	public Player(String id, String playerName, String email, String phone, String codeName, GroupType playerGroup) {
+	public PlayerDB(String id, String playerName, String email, String phone, String codeName, GroupTypeDB playerGroup) {
 		this.id = id;
 		this.playerName = playerName;
 		this.email = email;
 		this.phone = phone;
 		this.codeName = codeName;
 		this.playerGroup = playerGroup;
+	}
+
+	public PlayerDB(RegisterPlayerDto dto) {
+		this.playerName = dto.getName();
+		this.email = dto.getEmail();
+		this.phone = dto.getPhone();
+		this.playerGroup = GroupTypeDB.valueOf(dto.getType().getType());
 	}
 
 	public String getId() {
@@ -83,11 +91,17 @@ public class Player {
 		this.codeName = codeName;
 	}
 
-	public GroupType getPlayerGroup() {
+	public GroupTypeDB getPlayerGroup() {
 		return playerGroup;
 	}
 
-	public void setPlayerGroup(GroupType playerGroup) {
+	public void setPlayerGroup(GroupTypeDB playerGroup) {
 		this.playerGroup = playerGroup;
+	}
+
+	@Override
+	public String toString() {
+		return "PlayerDB [id=" + id + ", playerName=" + playerName + ", email=" + email + ", phone=" + phone
+				+ ", codeName=" + codeName + ", playerGroup=" + playerGroup + "]";
 	}
 }

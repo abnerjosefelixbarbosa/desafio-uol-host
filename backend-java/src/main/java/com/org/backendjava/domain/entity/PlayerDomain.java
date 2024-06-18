@@ -2,20 +2,20 @@ package com.org.backendjava.domain.entity;
 
 
 
-import com.org.backendjava.domain.enums.GroupType;
+import com.org.backendjava.domain.enums.GroupTypeDomain;
 
-public class Player {
+public class PlayerDomain {
 	private String id;
 	private String playerName;
 	private String email;
 	private String phone;
 	private String codeName;
-	private GroupType playerGroup;
+	private GroupTypeDomain playerGroup;
 	
-	public Player() {
+	public PlayerDomain() {
 	}
 
-	public Player(String id, String playerName, String email, String phone, String codeName, GroupType playerGroup) {
+	public PlayerDomain(String id, String playerName, String email, String phone, String codeName, GroupTypeDomain playerGroup) {
 		this.id = id;
 		this.playerName = playerName;
 		this.email = email;
@@ -64,11 +64,11 @@ public class Player {
 		this.codeName = codeName;
 	}
 
-	public GroupType getPlayerGroup() {
+	public GroupTypeDomain getPlayerGroup() {
 		return playerGroup;
 	}
 
-	public void setPlayerGroup(GroupType playerGroup) {
+	public void setPlayerGroup(GroupTypeDomain playerGroup) {
 		this.playerGroup = playerGroup;
 	}
 }

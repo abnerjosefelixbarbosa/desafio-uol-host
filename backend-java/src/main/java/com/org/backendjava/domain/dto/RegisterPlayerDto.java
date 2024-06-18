@@ -1,12 +1,12 @@
 package com.org.backendjava.domain.dto;
 
-import com.org.backendjava.domain.enums.GroupType;
+import com.org.backendjava.domain.enums.GroupTypeDomain;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public class RegisterDto {
+public class RegisterPlayerDto {
 	@NotNull
 	@NotEmpty 
 	private String name;
@@ -17,12 +17,12 @@ public class RegisterDto {
 	@NotEmpty
 	private String phone;
 	@NotNull
-	private GroupType type;
+	private GroupTypeDomain type;
 	
-	public RegisterDto() {
+	public RegisterPlayerDto() {
 	}
 	
-	public RegisterDto(String name, String email, String phone, GroupType type) {
+	public RegisterPlayerDto(String name, String email, String phone, GroupTypeDomain type) {
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
@@ -53,11 +53,11 @@ public class RegisterDto {
 		this.phone = phone;
 	}
 	
-	public GroupType getType() {
+	public GroupTypeDomain getType() {
 		return type;
 	}
 	
-	public void setType(GroupType type) {
+	public void setType(GroupTypeDomain type) {
 		this.type = type;
 	}
 }

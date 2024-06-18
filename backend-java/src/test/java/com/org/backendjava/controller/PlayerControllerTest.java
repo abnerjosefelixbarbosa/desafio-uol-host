@@ -12,8 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.org.backendjava.domain.dto.RegisterDto;
-import com.org.backendjava.domain.enums.GroupType;
+import com.org.backendjava.domain.dto.RegisterPlayerDto;
+import com.org.backendjava.domain.enums.GroupTypeDomain;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -25,7 +25,7 @@ public class PlayerControllerTest {
 	
 	@Test
 	public void shouldRegisterPlayerAndReturn201Status() throws Exception {
-		RegisterDto dto = new RegisterDto("João", "joao@gmail.com", "(81) 99447-4569", GroupType.AVENGER);
+		RegisterPlayerDto dto = new RegisterPlayerDto("João", "joao@gmail.com", "(81) 99447-4569", GroupTypeDomain.AVENGER);
 		String json = objectMapper.writeValueAsString(dto);
 		
 		mockMvc.perform(post("/api/players/register-player").contentType(MediaType.APPLICATION_JSON).content(json))
