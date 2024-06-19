@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.org.backendjava.infra.entity.PlayerDB;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<PlayerDB, String> {
+public interface IPlayerRepository extends JpaRepository<PlayerDB, String> {
 }

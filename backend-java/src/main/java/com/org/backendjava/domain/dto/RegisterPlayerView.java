@@ -1,6 +1,7 @@
 package com.org.backendjava.domain.dto;
 
 import com.org.backendjava.domain.enums.GroupTypeDomain;
+import com.org.backendjava.infra.entity.PlayerDB;
 
 public class RegisterPlayerView {
 	private String id;
@@ -21,6 +22,15 @@ public class RegisterPlayerView {
 		this.phone = phone;
 		this.codeName = codeName;
 		this.playerGroup = playerGroup;
+	}
+
+	public RegisterPlayerView(PlayerDB playerDB) {
+		this.id = playerDB.getId();
+		this.playerName = playerDB.getPlayerName();
+		this.email = playerDB.getEmail();
+		this.phone = playerDB.getPhone();
+		this.codeName = playerDB.getCodeName();
+		this.playerGroup = GroupTypeDomain.valueOf(playerDB.getPlayerGroup().getType());
 	}
 
 	public String getId() {
