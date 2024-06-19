@@ -7,16 +7,17 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class RegisterPlayerDto {
-	@NotNull
-	@NotEmpty 
+	@NotNull(message = "not should be null")
+	@NotEmpty (message = "not should be empty")
 	private String name;
-	@NotNull
-	@Email
+	@NotEmpty(message = "not should be empty")
+	@NotNull(message = "not should be null")
+	@Email(message = "not should be invalid")
 	private String email;
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "not should be null")
+	@NotEmpty(message = "not should be empty")
 	private String phone;
-	@NotNull
+	@NotNull(message = "not should be null")
 	private GroupTypeDomain type;
 	
 	public RegisterPlayerDto() {

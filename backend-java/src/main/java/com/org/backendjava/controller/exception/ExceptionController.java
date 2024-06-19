@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.org.backendjava.domain.exception.ExceptionDetails;
-import com.org.backendjava.domain.exception.NotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestControllerAdvice
@@ -31,8 +31,8 @@ public class ExceptionController {
 		return errors;
 	}
 	
-	@ExceptionHandler(NotFoundException.class)
-	public ResponseEntity<ExceptionDetails> handleNotFoundException(NotFoundException e, HttpServletRequest request) {
+	@ExceptionHandler(EntityNotFoundException.class)
+	public ResponseEntity<ExceptionDetails> handleEntityNotFoundException(EntityNotFoundException e, HttpServletRequest request) {
 		ExceptionDetails exceptionDetails = new ExceptionDetails();
 		exceptionDetails.setDateTime(Instant.now());
 		exceptionDetails.setStatus(404);

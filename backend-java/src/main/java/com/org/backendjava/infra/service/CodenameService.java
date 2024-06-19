@@ -17,10 +17,10 @@ import org.w3c.dom.NodeList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.org.backendjava.domain.exception.NotFoundException;
 import com.org.backendjava.infra.enums.GroupTypeDB;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CodenameService {
@@ -36,17 +36,17 @@ public class CodenameService {
 	public String getCodenameByGroupType(GroupTypeDB type) {
 		String codename = "";
 		
-		if (type.getType() == "AVENGER") {
+		if (type.getType() == "AVENGERS") {
 			codename = codenameAvengersList
 					.parallelStream()
 					.findFirst()
-					.orElseThrow(() -> new NotFoundException("code name not found"));
+					.orElseThrow(() -> new EntityNotFoundException("code name not found"));
 			codenameAvengersList.remove(codename);
 		} else {
 			codename = codenameJusticeLeagueList
 					.parallelStream()
 					.findFirst()
-					.orElseThrow(() -> new NotFoundException("code name not found"));
+					.orElseThrow(() -> new EntityNotFoundException("code name not found"));
 			codenameJusticeLeagueList.remove(codename);
 		}
 		

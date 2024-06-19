@@ -1,7 +1,7 @@
 package com.org.backendjava.infra.enums;
 
 public enum GroupTypeDB {
-    AVENGER("AVENGER"), JUSTICE_LEAGUE("JUSTICE_LEAGUE");
+    AVENGERS("AVENGERS"), JUSTICE_LEAGUE("JUSTICE_LEAGUE");
 	
 	private String type;
 

@@ -98,10 +98,4 @@ public class PlayerDB {
 	public void setPlayerGroup(GroupTypeDB playerGroup) {
 		this.playerGroup = playerGroup;
 	}
-
-	@Override
-	public String toString() {
-		return "PlayerDB [id=" + id + ", playerName=" + playerName + ", email=" + email + ", phone=" + phone
-				+ ", codeName=" + codeName + ", playerGroup=" + playerGroup + "]";
-	}
 }

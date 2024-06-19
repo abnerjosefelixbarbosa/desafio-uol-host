@@ -1,7 +1,7 @@
 package com.org.backendjava.domain.enums;
 
 public enum GroupTypeDomain {
-	AVENGER("AVENGER"), JUSTICE_LEAGUE("JUSTICE_LEAGUE");
+	AVENGERS("AVENGERS"), JUSTICE_LEAGUE("JUSTICE_LEAGUE");
 	
 	private String type;
 
