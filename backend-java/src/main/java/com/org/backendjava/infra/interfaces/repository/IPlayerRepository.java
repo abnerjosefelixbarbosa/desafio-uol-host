@@ -7,4 +7,5 @@ import com.org.backendjava.infra.entity.PlayerDB;
 
 @Repository
 public interface IPlayerRepository extends JpaRepository<PlayerDB, String> {
+	boolean existsByPlayerNameOrEmailOrPhone(String name, String email, String phone);
 }
