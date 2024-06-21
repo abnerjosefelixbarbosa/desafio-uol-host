@@ -2,7 +2,7 @@ package com.org.backendjava.infra.entity;
 
 
 
-import com.org.backendjava.domain.dto.RegisterPlayerDto;
+import com.org.backendjava.domain.dto.PlayerDto;
 import com.org.backendjava.infra.enums.GroupTypeDB;
 
 import jakarta.persistence.Column;
@@ -44,7 +44,7 @@ public class PlayerDB {
 		this.playerGroup = playerGroup;
 	}
 
-	public PlayerDB(RegisterPlayerDto dto) {
+	public PlayerDB(PlayerDto dto) {
 		this.playerName = dto.getName();
 		this.email = dto.getEmail();
 		this.phone = dto.getPhone();

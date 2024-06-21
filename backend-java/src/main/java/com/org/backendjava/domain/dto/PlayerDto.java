@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public class RegisterPlayerDto {
+public class PlayerDto {
 	@NotNull(message = "not should be null")
 	@NotEmpty (message = "not should be empty")
 	private String name;
@@ -20,10 +20,10 @@ public class RegisterPlayerDto {
 	@NotNull(message = "not should be null")
 	private GroupTypeDomain type;
 	
-	public RegisterPlayerDto() {
+	public PlayerDto() {
 	}
 	
-	public RegisterPlayerDto(String name, String email, String phone, GroupTypeDomain type) {
+	public PlayerDto(String name, String email, String phone, GroupTypeDomain type) {
 		this.name = name;
 		this.email = email;
 		this.phone = phone;

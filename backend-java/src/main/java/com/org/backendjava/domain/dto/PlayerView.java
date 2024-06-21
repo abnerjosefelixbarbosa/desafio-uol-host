@@ -3,7 +3,7 @@ package com.org.backendjava.domain.dto;
 import com.org.backendjava.domain.enums.GroupTypeDomain;
 import com.org.backendjava.infra.entity.PlayerDB;
 
-public class RegisterPlayerView {
+public class PlayerView {
 	private String id;
 	private String playerName;
 	private String email;
@@ -11,10 +11,10 @@ public class RegisterPlayerView {
 	private String codeName;
 	private GroupTypeDomain playerGroup;
 	
-	public RegisterPlayerView() {
+	public PlayerView() {
 	}
 	
-	public RegisterPlayerView(String id, String playerName, String email, String phone, String codeName,
+	public PlayerView(String id, String playerName, String email, String phone, String codeName,
 			GroupTypeDomain playerGroup) {
 		this.id = id;
 		this.playerName = playerName;
@@ -24,7 +24,7 @@ public class RegisterPlayerView {
 		this.playerGroup = playerGroup;
 	}
 
-	public RegisterPlayerView(PlayerDB playerDB) {
+	public PlayerView(PlayerDB playerDB) {
 		this.id = playerDB.getId();
 		this.playerName = playerDB.getPlayerName();
 		this.email = playerDB.getEmail();

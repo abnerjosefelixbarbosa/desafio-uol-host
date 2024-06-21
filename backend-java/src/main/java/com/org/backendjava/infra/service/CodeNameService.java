@@ -17,13 +17,14 @@ import org.w3c.dom.NodeList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.org.backendjava.adapter.ICodeNameGateway;
 import com.org.backendjava.infra.enums.GroupTypeDB;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class CodenameService {
+public class CodeNameService implements ICodeNameGateway {
 	@Autowired
 	private RestTemplate restTemplate;
 	@Autowired

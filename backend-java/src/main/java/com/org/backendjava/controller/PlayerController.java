@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.org.backendjava.domain.dto.RegisterPlayerDto;
-import com.org.backendjava.domain.dto.RegisterPlayerView;
-import com.org.backendjava.domain.interfaces.usercase.IRegisterPlayerUserCase;
+import com.org.backendjava.domain.dto.PlayerDto;
+import com.org.backendjava.domain.dto.PlayerView;
+import com.org.backendjava.domain.interfaces.usercase.IPlayerUserCase;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/players")
-public class RegisterPlayerController {
+public class PlayerController {
 	@Autowired
-	private IRegisterPlayerUserCase registerPlayerUserCase;
+	private IPlayerUserCase playerUserCase;
 
 	@PostMapping("/register-player")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ResponseEntity<RegisterPlayerView> registerPlayer(@Valid @RequestBody RegisterPlayerDto dto) {
-		RegisterPlayerView view = registerPlayerUserCase.registerPlayer(dto);
+	public ResponseEntity<PlayerView> registerPlayer(@Valid @RequestBody PlayerDto dto) {
+		PlayerView view = playerUserCase.registerPlayer(dto);
 		return ResponseEntity.status(201).body(view);
 	}
 }
