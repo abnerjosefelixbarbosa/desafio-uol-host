@@ -1,6 +1,8 @@
 package com.org.backendjava.infra.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.org.backendjava.adapter.ICodeNameGateway;
@@ -32,5 +34,11 @@ public class PlayerService implements IPlayerGateway {
 		PlayerView registerPlayerView = new PlayerView(playerDB);
 		
 		return registerPlayerView;
+	}
+
+	public Page<PlayerView> listPlayers(Pageable pageable) {
+		return playerRepository
+				.findAll(pageable)
+				.map(PlayerView::new);
 	}
 }

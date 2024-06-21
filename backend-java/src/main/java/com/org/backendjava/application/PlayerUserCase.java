@@ -1,6 +1,8 @@
 package com.org.backendjava.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.org.backendjava.adapter.IPlayerGateway;
@@ -15,5 +17,9 @@ public class PlayerUserCase implements IPlayerUserCase {
 
 	public PlayerView registerPlayer(PlayerDto dto) {
 		return playerGateway.registerPlayer(dto);
+	}
+
+	public Page<PlayerView> listPlayers(Pageable pageable) {
+		return playerGateway.listPlayers(pageable);
 	}	
 }

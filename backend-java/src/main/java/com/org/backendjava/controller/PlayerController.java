@@ -1,8 +1,11 @@
 package com.org.backendjava.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +29,12 @@ public class PlayerController {
 	public ResponseEntity<PlayerView> registerPlayer(@Valid @RequestBody PlayerDto dto) {
 		PlayerView view = playerUserCase.registerPlayer(dto);
 		return ResponseEntity.status(201).body(view);
+	}
+	
+	@GetMapping("/list-players")
+	@ResponseStatus(code = HttpStatus.OK)
+	public ResponseEntity<Page<?>> listPlayers(Pageable pageable) {
+		Page<PlayerView> views = playerUserCase.listPlayers(pageable);
+		return ResponseEntity.status(200).body(views);
 	}
 }
