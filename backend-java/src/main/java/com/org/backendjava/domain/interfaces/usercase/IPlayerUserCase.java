@@ -9,4 +9,5 @@ import com.org.backendjava.domain.dto.PlayerView;
 public interface IPlayerUserCase {
 	PlayerView registerPlayer(PlayerDto dto);
 	Page<PlayerView> listPlayers(Pageable pageable);
+	void deletePlayerById(String id);
 }

@@ -41,4 +41,8 @@ public class PlayerService implements IPlayerGateway {
 				.findAll(pageable)
 				.map(PlayerView::new);
 	}
+
+	public void deletePlayerById(String id) {
+		playerRepository.deleteById(id);
+	}
 }

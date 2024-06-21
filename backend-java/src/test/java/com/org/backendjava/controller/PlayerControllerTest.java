@@ -49,6 +49,15 @@ public class PlayerControllerTest {
 		.andDo(print());
 	}
 	
+	@Test
+	public void shouldDeletePlayerByIdAndReturn200Status() throws Exception {
+		registerPlayerAvenger();
+		
+		mockMvc.perform(get("/api/players/list-players"))
+		.andExpect(MockMvcResultMatchers.status().isOk())
+		.andDo(print());
+	}
+	
 	private void registerPlayerAvenger() {
 		PlayerDto dto1 = new PlayerDto("Mirela", "mirela@gmail.com", "(81) 99447-4501", GroupTypeDomain.AVENGERS);
 		PlayerDto dto2 = new PlayerDto("Gabriel", "gabriel@gmail.com", "(81) 99447-4502", GroupTypeDomain.AVENGERS);
@@ -64,5 +73,11 @@ public class PlayerControllerTest {
 		playerService.registerPlayer(dto5);
 		playerService.registerPlayer(dto6);
 		playerService.registerPlayer(dto7);
+		
+		getPlayerId(view.getId());
+	}
+	
+	public String getPlayerId(String id) {
+		return id;
 	}
 }

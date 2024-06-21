@@ -21,5 +21,9 @@ public class PlayerUserCase implements IPlayerUserCase {
 
 	public Page<PlayerView> listPlayers(Pageable pageable) {
 		return playerGateway.listPlayers(pageable);
+	}
+
+	public void deletePlayerById(String id) {
+		playerGateway.deletePlayerById(id);
 	}	
 }

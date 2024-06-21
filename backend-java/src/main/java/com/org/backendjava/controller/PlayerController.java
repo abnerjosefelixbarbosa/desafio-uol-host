@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,8 +34,16 @@ public class PlayerController {
 	
 	@GetMapping("/list-players")
 	@ResponseStatus(code = HttpStatus.OK)
-	public ResponseEntity<Page<?>> listPlayers(Pageable pageable) {
+	public ResponseEntity<Page<PlayerView>> listPlayers(Pageable pageable) {
 		Page<PlayerView> views = playerUserCase.listPlayers(pageable);
 		return ResponseEntity.status(200).body(views);
+	}
+	
+	@GetMapping("/delete-player-by-id")
+	@ResponseStatus(code = HttpStatus.OK)
+	public ResponseEntity<Void> deletePlayerById(@RequestParam String id) {
+		//Page<PlayerView> views = playerUserCase.listPlayers(pageable);
+		playerUserCase.deletePlayerById(id);
+		return ResponseEntity.status(200).body(null);
 	}
 }
