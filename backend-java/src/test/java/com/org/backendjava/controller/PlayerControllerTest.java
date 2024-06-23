@@ -1,10 +1,11 @@
 package com.org.backendjava.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,7 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.org.backendjava.domain.dto.PlayerDto;
 import com.org.backendjava.domain.dto.PlayerView;
 import com.org.backendjava.domain.enums.GroupTypeDomain;
-import com.org.backendjava.infra.interfaces.repository.IPlayerRepository;
 import com.org.backendjava.infra.service.PlayerService;
 
 @SpringBootTest
@@ -29,6 +29,7 @@ public class PlayerControllerTest {
 	private ObjectMapper objectMapper;
 	@Autowired
 	private PlayerService playerService;
+	private PlayerView playerView = null;
 	
 	@Test
 	public void shouldRegisterPlayerAndReturn201Status() throws Exception {
@@ -50,15 +51,27 @@ public class PlayerControllerTest {
 	}
 	
 	@Test
-	public void shouldDeletePlayerByIdAndReturn200Status() throws Exception {
+	public void shouldDeletePlayerByIdAndReturn204Status() throws Exception {
 		registerPlayerAvenger();
 		
-		mockMvc.perform(get("/api/players/list-players"))
+		mockMvc.perform(delete("/api/players/delete-player-by-id?id=" + getPlayerView().getId()))
+		.andExpect(MockMvcResultMatchers.status().isNoContent())
+		.andDo(print());
+	}
+	
+	@Test
+	public void shouldUpdatePlayerByIdAndReturn200Status() throws Exception {
+		registerPlayerAvenger();
+		
+		PlayerDto dto = new PlayerDto("João", "joao@gmail.com", "(81) 99447-4569", GroupTypeDomain.AVENGERS);
+		String json = objectMapper.writeValueAsString(dto);
+		
+		mockMvc.perform(put("/api/players/update-player?id=" + getPlayerView().getId()).contentType(MediaType.APPLICATION_JSON).content(json))
 		.andExpect(MockMvcResultMatchers.status().isOk())
 		.andDo(print());
 	}
 	
-	private void registerPlayerAvenger() {
+	public void registerPlayerAvenger() {
 		PlayerDto dto1 = new PlayerDto("Mirela", "mirela@gmail.com", "(81) 99447-4501", GroupTypeDomain.AVENGERS);
 		PlayerDto dto2 = new PlayerDto("Gabriel", "gabriel@gmail.com", "(81) 99447-4502", GroupTypeDomain.AVENGERS);
 		PlayerDto dto3 = new PlayerDto("Felipe", "felipe@gmail.com", "(81) 99447-4503", GroupTypeDomain.AVENGERS);
@@ -74,10 +87,14 @@ public class PlayerControllerTest {
 		playerService.registerPlayer(dto6);
 		playerService.registerPlayer(dto7);
 		
-		getPlayerId(view.getId());
+		setPlayerView(view);
 	}
 	
-	public String getPlayerId(String id) {
-		return id;
+	public void setPlayerView(PlayerView playerView) {
+		this.playerView = playerView;
+	}
+	
+	public PlayerView getPlayerView() {
+		return playerView;
 	}
 }

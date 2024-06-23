@@ -12,6 +12,8 @@ import com.org.backendjava.domain.dto.PlayerView;
 import com.org.backendjava.infra.entity.PlayerDB;
 import com.org.backendjava.infra.interfaces.repository.IPlayerRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class PlayerService implements IPlayerGateway {
 	@Autowired
@@ -20,20 +22,20 @@ public class PlayerService implements IPlayerGateway {
 	private ICodeNameGateway codeNameGateway;
 
 	public PlayerView registerPlayer(PlayerDto dto) {
-		PlayerDB playerDB = new PlayerDB(dto);
-		String codename = codeNameGateway.getCodenameByGroupType(playerDB.getPlayerGroup());
+		PlayerDB player = new PlayerDB(dto);
+		String codename = codeNameGateway.getCodenameByGroupType(player.getPlayerGroup());
 		
 		boolean existsByPlayerNameOrEmailOrPhone = playerRepository
-				.existsByPlayerNameOrEmailOrPhone(playerDB.getPlayerName(), playerDB.getEmail(), playerDB.getPhone());
+				.existsByPlayerNameOrEmailOrPhone(player.getPlayerName(), player.getEmail(), player.getPhone());
 		
 		if (existsByPlayerNameOrEmailOrPhone)
 			throw new RuntimeException("name, email or plone exists");
 		
-		playerDB.setCodeName(codename);
-		playerDB = playerRepository.save(playerDB);
-		PlayerView registerPlayerView = new PlayerView(playerDB);
+		player.setCodeName(codename);
+		player = playerRepository.save(player);
+		PlayerView view = new PlayerView(player);
 		
-		return registerPlayerView;
+		return view;
 	}
 
 	public Page<PlayerView> listPlayers(Pageable pageable) {
@@ -44,5 +46,19 @@ public class PlayerService implements IPlayerGateway {
 
 	public void deletePlayerById(String id) {
 		playerRepository.deleteById(id);
+	}
+
+	public PlayerView updatePlayer(String id, PlayerDto dto) {
+		PlayerDB player = playerRepository
+				.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("id not found"));
+		
+		player.setEmail(dto.getEmail());
+		player.setPhone(dto.getPhone());
+		player.setPlayerName(dto.getName());
+		
+		player = playerRepository.save(player);
+		
+		return new PlayerView(player);
 	}
 }

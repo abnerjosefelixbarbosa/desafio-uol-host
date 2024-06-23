@@ -10,4 +10,5 @@ public interface IPlayerGateway {
 	PlayerView registerPlayer(PlayerDto dto);
 	Page<PlayerView> listPlayers(Pageable pageable);
 	void deletePlayerById(String id);
+	PlayerView updatePlayer(String id, PlayerDto dto);
 }

@@ -25,5 +25,9 @@ public class PlayerUserCase implements IPlayerUserCase {
 
 	public void deletePlayerById(String id) {
 		playerGateway.deletePlayerById(id);
+	}
+
+	public PlayerView updatePlayer(String id, PlayerDto dto) {
+		return playerGateway.updatePlayer(id, dto);
 	}	
 }
