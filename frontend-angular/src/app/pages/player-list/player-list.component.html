@@ -5,12 +5,19 @@
   <section class="card">
     <mat-card appearance="outlined" >
       <mat-card-content>
-        <mat-selection-list>
-        </mat-selection-list>
+        <table mat-table [dataSource]="players" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let player"> {{ player.name }} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columns"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+        </table>
         <div class="btn-new-player">
           <button mat-raised-button>New Player</button>
         </div>
-
       </mat-card-content>
     </mat-card>
   </section>
