@@ -1,11 +1,10 @@
-import { IPlayer } from '../interface/IPlayer';
+import { PlayerGroup } from "./playerGroup.enum";
 
-export class Player implements IPlayer {
-  id: string;
-  name: string;
-
-  constructor(id: string, name: string) {
-    this.id = id;
-    this.name = name;
-  }
+export interface Player {
+  id: String | null;
+  name: String | null;
+  email: String | null;
+  phone: String | null;
+  codeName: String | null;
+  playerGroup: PlayerGroup | null;
 }

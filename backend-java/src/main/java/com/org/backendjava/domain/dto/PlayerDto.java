@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PlayerDto {
 	@NotNull(message = "not should be null")
-	@NotEmpty (message = "not should be empty")
+	@NotEmpty(message = "not should be empty")
 	private String name;
 	@NotEmpty(message = "not should be empty")
 	@NotNull(message = "not should be null")

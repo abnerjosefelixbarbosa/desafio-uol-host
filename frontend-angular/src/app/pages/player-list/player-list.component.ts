@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -6,7 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { Player } from '../../model/player';
-import { PlayerService } from '../../service/player.service';
+import { IPlayerService, PlayerService } from '../../service/player.service';
+import { PlayerGroup } from '../../model/playerGroup.enum';
 
 @Component({
   selector: 'app-player-list',
@@ -25,18 +31,37 @@ import { PlayerService } from '../../service/player.service';
 })
 export class PlayerListComponent implements OnInit {
   players: Player[] = [];
-  columns = ['name'];
-  playerService: PlayerService;
+  columns = ['name', 'email', 'phone', 'codeName', 'playerGroup'];
 
-  constructor(playerService: PlayerService) {
-    this.playerService = playerService;
+  constructor(private playerService: PlayerService) {}
+
+  registerPlayer(): void {
+    const data = {
+      name: 'name1',
+      email: 'email1@gmail.com',
+      phone: '(81) 99940-5641',
+      type: 'AVENGERS',
+    };
+    this.playerService.registerPlayer(data)
+    .subscribe((res) => {
+      this.players.push({
+        id: res.id,
+        name: res.playerName,
+        email: res.email,
+        phone: res.phone,
+        codeName: res.codeName,
+        playerGroup: res.PlayerGroup,
+      })
+    });
   }
 
-  listPlayer(): void {
-    this.players = this.playerService.listPlayer();
+  listPlayers(): void {
+    this.playerService
+      .listPlayers()
+      .subscribe((val) => this.players.push(val.content));
   }
 
   ngOnInit(): void {
-    this.listPlayer();
+    this.listPlayers();
   }
 }
