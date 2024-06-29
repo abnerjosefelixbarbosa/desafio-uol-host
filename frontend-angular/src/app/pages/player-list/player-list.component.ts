@@ -40,13 +40,13 @@ export class PlayerListComponent implements OnInit {
       name: 'name1',
       email: 'email1@gmail.com',
       phone: '(81) 99940-5641',
-      type: 'AVENGERS',
+      type: PlayerGroup.AVENGERS,
     };
     this.playerService.registerPlayer(data).subscribe((res) => {
       this.players.push(
         new Player(
           res.id,
-          res.playerName,
+          res.name,
           res.email,
           res.phone,
           res.codeName,

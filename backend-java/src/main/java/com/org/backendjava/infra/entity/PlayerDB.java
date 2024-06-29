@@ -4,7 +4,6 @@ package com.org.backendjava.infra.entity;
 
 import java.io.Serializable;
 
-import com.org.backendjava.domain.dto.PlayerDto;
 import com.org.backendjava.infra.enums.GroupTypeDB;
 
 import jakarta.persistence.Column;
@@ -41,11 +40,4 @@ public class PlayerDB implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private GroupTypeDB playerGroup;
-
-	public PlayerDB(PlayerDto dto) {
-		this.name = dto.getName();
-		this.email = dto.getEmail();
-		this.phone = dto.getPhone();
-		this.playerGroup = GroupTypeDB.valueOf(dto.getType().getType());
-	}
 }

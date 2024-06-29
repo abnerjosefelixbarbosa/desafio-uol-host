@@ -54,7 +54,7 @@ public class PlayerControllerTest {
 	public void shouldDeletePlayerByIdAndReturn204Status() throws Exception {
 		registerPlayerAvenger();
 		
-		mockMvc.perform(delete("/api/players/delete-player-by-id?id=" + getPlayerView().getId()))
+		mockMvc.perform(delete("/api/players/delete-player-by-id?id=" + getPlayerView().id()))
 		.andExpect(MockMvcResultMatchers.status().isNoContent())
 		.andDo(print());
 	}
@@ -66,7 +66,7 @@ public class PlayerControllerTest {
 		PlayerDto dto = new PlayerDto("João", "joao@gmail.com", "(81) 99447-4569", GroupTypeDomain.AVENGERS);
 		String json = objectMapper.writeValueAsString(dto);
 		
-		mockMvc.perform(put("/api/players/update-player?id=" + getPlayerView().getId()).contentType(MediaType.APPLICATION_JSON).content(json))
+		mockMvc.perform(put("/api/players/update-player?id=" + getPlayerView().id()).contentType(MediaType.APPLICATION_JSON).content(json))
 		.andExpect(MockMvcResultMatchers.status().isOk())
 		.andDo(print());
 	}

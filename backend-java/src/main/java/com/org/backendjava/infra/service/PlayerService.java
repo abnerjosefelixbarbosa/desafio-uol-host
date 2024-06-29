@@ -9,6 +9,7 @@ import com.org.backendjava.adapter.ICodeNameGateway;
 import com.org.backendjava.adapter.IPlayerGateway;
 import com.org.backendjava.domain.dto.PlayerDto;
 import com.org.backendjava.domain.dto.PlayerView;
+import com.org.backendjava.domain.mapper.PlayerMapper;
 import com.org.backendjava.infra.entity.PlayerDB;
 import com.org.backendjava.infra.interfaces.repository.IPlayerRepository;
 
@@ -20,9 +21,11 @@ public class PlayerService implements IPlayerGateway {
 	private IPlayerRepository playerRepository;
 	@Autowired
 	private ICodeNameGateway codeNameGateway;
+	@Autowired
+	private PlayerMapper playerMapper;
 
 	public PlayerView registerPlayer(PlayerDto dto) {
-		PlayerDB player = new PlayerDB(dto);
+		PlayerDB player = playerMapper.toPlayerDB(dto);
 		String codename = codeNameGateway.getCodenameByGroupType(player.getPlayerGroup());
 		
 		boolean existsByPlayerNameOrEmailOrPhone = playerRepository
@@ -33,7 +36,7 @@ public class PlayerService implements IPlayerGateway {
 		
 		player.setCodeName(codename);
 		player = playerRepository.save(player);
-		PlayerView view = new PlayerView(player);
+		PlayerView view = playerMapper.toPlayerView(player);
 		
 		return view;
 	}
@@ -41,7 +44,7 @@ public class PlayerService implements IPlayerGateway {
 	public Page<PlayerView> listPlayers(Pageable pageable) {
 		return playerRepository
 				.findAll(pageable)
-				.map(PlayerView::new);
+				.map(playerMapper::toPlayerView);
 	}
 
 	public void deletePlayerById(String id) {
@@ -49,16 +52,14 @@ public class PlayerService implements IPlayerGateway {
 	}
 
 	public PlayerView updatePlayer(String id, PlayerDto dto) {
-		PlayerDB player = playerRepository
+		return playerRepository
 				.findById(id)
+				.map((val) -> {
+					val.setEmail(dto.email());
+					val.setPhone(dto.phone());
+					val.setName(dto.name());
+					return playerMapper.toPlayerView(playerRepository.save(val));
+				})
 				.orElseThrow(() -> new EntityNotFoundException("id not found"));
-		
-		player.setEmail(dto.getEmail());
-		player.setPhone(dto.getPhone());
-		player.setName(dto.getName());
-		
-		player = playerRepository.save(player);
-		
-		return new PlayerView(player);
 	}
 }
