@@ -2,6 +2,8 @@ package com.org.backendjava.infra.entity;
 
 
 
+import java.io.Serializable;
+
 import com.org.backendjava.domain.dto.PlayerDto;
 import com.org.backendjava.infra.enums.GroupTypeDB;
 
@@ -22,12 +24,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlayerDB {
+public class PlayerDB implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
 	@Column(name = "player_name", nullable = false, unique = true)
-	private String playerName;
+	private String name;
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	@Column(name = "phone", nullable = false, unique = true)
@@ -39,7 +43,7 @@ public class PlayerDB {
 	private GroupTypeDB playerGroup;
 
 	public PlayerDB(PlayerDto dto) {
-		this.playerName = dto.getName();
+		this.name = dto.getName();
 		this.email = dto.getEmail();
 		this.phone = dto.getPhone();
 		this.playerGroup = GroupTypeDB.valueOf(dto.getType().getType());

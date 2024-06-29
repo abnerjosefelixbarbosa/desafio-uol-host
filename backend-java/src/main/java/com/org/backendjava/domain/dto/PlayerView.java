@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PlayerView {
 	private String id;
-	private String playerName;
+	private String name;
 	private String email;
 	private String phone;
 	private String codeName;
@@ -20,7 +20,7 @@ public class PlayerView {
 
 	public PlayerView(PlayerDB playerDB) {
 		this.id = playerDB.getId();
-		this.playerName = playerDB.getPlayerName();
+		this.name = playerDB.getName();
 		this.email = playerDB.getEmail();
 		this.phone = playerDB.getPhone();
 		this.codeName = playerDB.getCodeName();

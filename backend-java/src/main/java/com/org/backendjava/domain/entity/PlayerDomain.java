@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PlayerDomain {
 	private String id;
-	private String playerName;
+	private String name;
 	private String email;
 	private String phone;
 	private String codeName;

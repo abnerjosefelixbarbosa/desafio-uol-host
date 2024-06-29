@@ -42,23 +42,26 @@ export class PlayerListComponent implements OnInit {
       phone: '(81) 99940-5641',
       type: 'AVENGERS',
     };
-    this.playerService.registerPlayer(data)
-    .subscribe((res) => {
-      this.players.push({
-        id: res.id,
-        name: res.playerName,
-        email: res.email,
-        phone: res.phone,
-        codeName: res.codeName,
-        playerGroup: res.PlayerGroup,
-      })
+    this.playerService.registerPlayer(data).subscribe((res) => {
+      this.players.push(
+        new Player(
+          res.id,
+          res.playerName,
+          res.email,
+          res.phone,
+          res.codeName,
+          res.playerGroup
+        )
+      );
     });
   }
 
   listPlayers(): void {
     this.playerService
       .listPlayers()
-      .subscribe((val) => this.players.push(val.content));
+      .subscribe((val) => {
+        this.players = (val.content);
+      });
   }
 
   ngOnInit(): void {

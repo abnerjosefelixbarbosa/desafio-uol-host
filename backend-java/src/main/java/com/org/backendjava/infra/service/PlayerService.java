@@ -26,7 +26,7 @@ public class PlayerService implements IPlayerGateway {
 		String codename = codeNameGateway.getCodenameByGroupType(player.getPlayerGroup());
 		
 		boolean existsByPlayerNameOrEmailOrPhone = playerRepository
-				.existsByPlayerNameOrEmailOrPhone(player.getPlayerName(), player.getEmail(), player.getPhone());
+				.existsByNameOrEmailOrPhone(player.getName(), player.getEmail(), player.getPhone());
 		
 		if (existsByPlayerNameOrEmailOrPhone)
 			throw new RuntimeException("name, email or plone exists");
@@ -55,7 +55,7 @@ public class PlayerService implements IPlayerGateway {
 		
 		player.setEmail(dto.getEmail());
 		player.setPhone(dto.getPhone());
-		player.setPlayerName(dto.getName());
+		player.setName(dto.getName());
 		
 		player = playerRepository.save(player);
 		
