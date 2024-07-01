@@ -16,13 +16,13 @@ public class PlayerMapper {
 	}
 	
 	public PlayerDB toPlayerDB(PlayerDto dto) {
-		PlayerDB playerDB = new PlayerDB();
-		playerDB.setId(null);
-		playerDB.setName(dto.name());
-		playerDB.setEmail(dto.email());
-		playerDB.setPhone(dto.phone());
-		playerDB.setCodeName(null);
-		playerDB.setPlayerGroup(GroupTypeDB.valueOf(dto.type().toString()));
+		PlayerDB playerDB = PlayerDB
+				.builder()
+				.name(dto.name())
+				.email(dto.email())
+				.phone(dto.phone())
+				.playerGroup(GroupTypeDB.valueOf(dto.type().getType().toString()))
+				.build();
 		return playerDB;
 	}
 }

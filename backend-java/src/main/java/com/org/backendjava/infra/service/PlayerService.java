@@ -25,14 +25,14 @@ public class PlayerService implements IPlayerGateway {
 	private PlayerMapper playerMapper;
 
 	public PlayerView registerPlayer(PlayerDto dto) {
-		PlayerDB player = playerMapper.toPlayerDB(dto);
-		String codename = codeNameGateway.getCodenameByGroupType(player.getPlayerGroup());
-		
 		boolean existsByPlayerNameOrEmailOrPhone = playerRepository
-				.existsByNameOrEmailOrPhone(player.getName(), player.getEmail(), player.getPhone());
+				.existsByNameOrEmailOrPhone(dto.name(), dto.email(), dto.phone());
 		
 		if (existsByPlayerNameOrEmailOrPhone)
 			throw new RuntimeException("name, email or plone exists");
+		
+		PlayerDB player = playerMapper.toPlayerDB(dto);
+		String codename = codeNameGateway.getCodenameByGroupType(player.getPlayerGroup());
 		
 		player.setCodeName(codename);
 		player = playerRepository.save(player);
@@ -52,12 +52,19 @@ public class PlayerService implements IPlayerGateway {
 	}
 
 	public PlayerView updatePlayer(String id, PlayerDto dto) {
+		boolean existsByPlayerNameOrEmailOrPhone = playerRepository
+				.existsByNameOrEmailOrPhone(dto.name(), dto.email(), dto.phone());
+		
+		if (existsByPlayerNameOrEmailOrPhone)
+			throw new RuntimeException("name, email or plone exists");
+		
 		return playerRepository
 				.findById(id)
 				.map((val) -> {
 					val.setEmail(dto.email());
 					val.setPhone(dto.phone());
 					val.setName(dto.name());
+					
 					return playerMapper.toPlayerView(playerRepository.save(val));
 				})
 				.orElseThrow(() -> new EntityNotFoundException("id not found"));

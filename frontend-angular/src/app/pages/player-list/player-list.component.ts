@@ -11,8 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { Player } from '../../model/player';
-import { IPlayerService, PlayerService } from '../../service/player.service';
-import { PlayerGroup } from '../../model/playerGroup.enum';
+import { PlayerService } from '../../service/player.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-player-list',
@@ -33,35 +33,39 @@ export class PlayerListComponent implements OnInit {
   players: Player[] = [];
   columns = ['name', 'email', 'phone', 'codeName', 'playerGroup'];
 
-  constructor(private playerService: PlayerService) {}
+  constructor(private playerService: PlayerService, private router: Router) {}
 
   registerPlayer(): void {
+    /*
     const data = {
       name: 'name1',
       email: 'email1@gmail.com',
-      phone: '(81) 99940-5641',
+      phone: '(81) 91111-1101',
       type: PlayerGroup.AVENGERS,
     };
-    this.playerService.registerPlayer(data).subscribe((res) => {
-      this.players.push(
-        new Player(
-          res.id,
-          res.name,
-          res.email,
-          res.phone,
-          res.codeName,
-          res.playerGroup
-        )
-      );
+
+    this.playerService
+    .registerPlayer(data)
+    .subscribe((response) => {
+      this.players.push({
+        id: response.id,
+        name: response.name,
+        email: response.email,
+        phone: response.phone,
+        codeName: response.codeName,
+        playerGroup: response.playerGroup,
+      });
     });
+    */
+   this.router.navigate(['player_creation']);
   }
 
   listPlayers(): void {
     this.playerService
-      .listPlayers()
-      .subscribe((val) => {
-        this.players = (val.content);
-      });
+    .listPlayers()
+    .subscribe((val) => {
+      this.players = val.content;
+    });
   }
 
   ngOnInit(): void {
