@@ -7,6 +7,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-player-creation',
@@ -20,8 +22,20 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
   ],
   templateUrl: './player-creation.component.html',
   styleUrl: './player-creation.component.scss',
 })
-export class PlayerCreationComponent {}
+export class PlayerCreationComponent {
+
+  constructor(private router: Router) {}
+
+  listerPlayer(): void {
+    this.router.navigate(['']);
+  }
+
+  registerPlayer(): void {
+    
+  }
+}
