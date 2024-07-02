@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
+import { Player } from '../../model/player';
 
 @Component({
   selector: 'app-player-creation',
@@ -28,6 +29,14 @@ import { Router } from '@angular/router';
   styleUrl: './player-creation.component.scss',
 })
 export class PlayerCreationComponent {
+  player: Player = {
+    id: null,
+    name: '',
+    email: '',
+    phone: '',
+    codeName: null,
+    playerGroup: null,
+  };
 
   constructor(private router: Router) {}
 
@@ -36,6 +45,6 @@ export class PlayerCreationComponent {
   }
 
   registerPlayer(): void {
-    
+    console.log(this.player.name);
   }
 }

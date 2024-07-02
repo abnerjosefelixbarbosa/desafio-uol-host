@@ -8,17 +8,17 @@
         <form class="example-form">
           <mat-form-field class="example-full-width">
             <mat-label>Name</mat-label>
-            <input matInput />
+            <input matInput name="name" [(ngModel)]="player.name" />
           </mat-form-field>
         
           <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput />
+            <input matInput name="email" />
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>Phone</mat-label>
-            <input matInput />
+            <input matInput name="phone" />
           </mat-form-field>
 
           <mat-form-field>
