@@ -5,33 +5,33 @@
   <section class="card">
     <mat-card appearance="outlined">
       <mat-card-content class="content">
-        <form class="example-form">
+        <form [formGroup]="formData" class="example-form">
           <mat-form-field class="example-full-width">
             <mat-label>Name</mat-label>
-            <input matInput name="name" [(ngModel)]="player.name" />
+            <input matInput formControlName="name" />
           </mat-form-field>
         
           <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput name="email" />
+            <input matInput formControlName="email"/>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>Phone</mat-label>
-            <input matInput name="phone" />
+            <input matInput formControlName="phone" />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Select</mat-label>
-            <select matNativeControl required>
+            <select matNativeControl required formControlName="group">
               <option value="JUSTICE_LEAGUE">Justice League</option>
               <option value="AVENGERS">The Avengers</option>
             </select>
           </mat-form-field>
 
           <div class="btns-register-list-players">
-            <button mat-raised-button>Register Player</button>
-            <button mat-raised-button (click)="listerPlayer()">List Player</button>
+            <button mat-raised-button type="submit" (submit)="registerPlayer()">Register Player</button>
+            <button mat-raised-button type="button" (click)="listerPlayer()">List Player</button>
           </div>
         </form>
       </mat-card-content>

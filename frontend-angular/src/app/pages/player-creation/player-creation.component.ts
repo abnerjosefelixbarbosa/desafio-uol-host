@@ -6,10 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
-import { Player } from '../../model/player';
+
+interface data {
+
+}
 
 @Component({
   selector: 'app-player-creation',
@@ -20,7 +23,7 @@ import { Player } from '../../model/player';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -29,14 +32,12 @@ import { Player } from '../../model/player';
   styleUrl: './player-creation.component.scss',
 })
 export class PlayerCreationComponent {
-  player: Player = {
-    id: null,
-    name: '',
-    email: '',
-    phone: '',
-    codeName: null,
-    playerGroup: null,
-  };
+  formData = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(50)]),
+    phone: new FormControl('', [Validators.required]),
+    group: new FormControl('', Validators.required)
+  });
 
   constructor(private router: Router) {}
 
@@ -45,6 +46,6 @@ export class PlayerCreationComponent {
   }
 
   registerPlayer(): void {
-    console.log(this.player.name);
+    
   }
 }
