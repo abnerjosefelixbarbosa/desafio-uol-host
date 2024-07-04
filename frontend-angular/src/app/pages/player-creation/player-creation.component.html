@@ -8,29 +8,66 @@
         <form [formGroup]="formData" class="example-form">
           <mat-form-field class="example-full-width">
             <mat-label>Name</mat-label>
-            <input matInput formControlName="name" />
+            <input
+              matInput
+              formControlName="name"
+              #name
+            />
+
+            <mat-error *ngIf="formData.get('name')?.invalid">
+              {{ getErrorMessage('name') }}
+            </mat-error>
+
+            <mat-hint align="end">{{name.value.length || 0}}/ 100</mat-hint>
           </mat-form-field>
         
           <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email"/>
+            <input 
+              matInput 
+              formControlName="email"
+              #email
+            />
+
+            <mat-error *ngIf="formData.get('email')?.invalid">
+              {{ getErrorMessage('email') }}
+            </mat-error>
+
+            <mat-hint align="end">{{email.value.length || 0}}/ 50</mat-hint>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>Phone</mat-label>
-            <input matInput formControlName="phone" />
+            <input 
+              matInput 
+              formControlName="phone"
+              #phone 
+            />
+
+            <mat-error *ngIf="formData.get('phone')?.invalid">
+              {{ getErrorMessage('phone') }}
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Select</mat-label>
-            <select matNativeControl required formControlName="group">
+            <select 
+              matNativeControl 
+              required 
+              formControlName="group"
+              #group
+            >
               <option value="JUSTICE_LEAGUE">Justice League</option>
               <option value="AVENGERS">The Avengers</option>
             </select>
+
+            <mat-error *ngIf="formData.get('group')?.invalid">
+              {{ getErrorMessage('group') }}
+            </mat-error>
           </mat-form-field>
 
           <div class="btns-register-list-players">
-            <button mat-raised-button type="submit" (submit)="registerPlayer()">Register Player</button>
+            <button mat-raised-button type="submit" (click)="registerPlayer()">Register Player</button>
             <button mat-raised-button type="button" (click)="listerPlayer()">List Player</button>
           </div>
         </form>
