@@ -14,9 +14,11 @@
               #name
             />
 
-            <mat-error *ngIf="formData.get('name')?.invalid">
-              {{ getErrorMessage('name') }}
-            </mat-error>
+            @if(formData.get('name')?.invalid) {
+              <mat-error>
+                {{ getErrorMessage('name') }}
+              </mat-error>
+            }
 
             <mat-hint align="end">{{name.value.length || 0}}/ 100</mat-hint>
           </mat-form-field>
@@ -29,9 +31,11 @@
               #email
             />
 
-            <mat-error *ngIf="formData.get('email')?.invalid">
-              {{ getErrorMessage('email') }}
-            </mat-error>
+            @if(formData.get('email')?.invalid) {
+              <mat-error>
+                {{ getErrorMessage('email') }}
+              </mat-error>
+            }
 
             <mat-hint align="end">{{email.value.length || 0}}/ 50</mat-hint>
           </mat-form-field>
@@ -44,9 +48,11 @@
               #phone 
             />
 
-            <mat-error *ngIf="formData.get('phone')?.invalid">
-              {{ getErrorMessage('phone') }}
-            </mat-error>
+            @if(formData.get('phone')?.invalid) {
+              <mat-error>
+                {{ getErrorMessage('phone') }}
+              </mat-error>
+            }
           </mat-form-field>
 
           <mat-form-field>
@@ -61,9 +67,11 @@
               <option value="AVENGERS">The Avengers</option>
             </select>
 
-            <mat-error *ngIf="formData.get('group')?.invalid">
-              {{ getErrorMessage('group') }}
-            </mat-error>
+            @if(formData.get('group')?.invalid) {
+              <mat-error>
+                {{ getErrorMessage('group') }}
+              </mat-error>
+            }
           </mat-form-field>
 
           <div class="btns-register-list-players">

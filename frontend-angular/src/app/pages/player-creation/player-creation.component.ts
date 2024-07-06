@@ -6,11 +6,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
-import { filter } from 'rxjs';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { PlayerService } from '../../service/player/player.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-player-creation',
@@ -26,45 +38,60 @@ import { filter } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    NgFor,
-    NgIf
   ],
   templateUrl: './player-creation.component.html',
   styleUrl: './player-creation.component.scss',
 })
 export class PlayerCreationComponent {
-  formData = new FormGroup({
-    name: new FormControl('',
-      [
-        Validators.required,
-        Validators.maxLength(100),
-      ]),
-    email: new FormControl('', 
-      [
-        Validators.required,
-        Validators.email,
-        Validators.maxLength(50),
-      ]),
-    phone: new FormControl('',
-      [
-        Validators.required,
-        Validators.maxLength(20),
-      ]),
-    group: new FormControl('', 
-      [
-        Validators.required,
-      ]),
+  formData: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
+      Validators.maxLength(50),
+    ]),
+    phone: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+    group: new FormControl('', [Validators.required]),
   });
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  constructor(private router: Router) { 
-  }
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private playerService: PlayerService
+  ) {}
 
   listerPlayer(): void {
-    this.router.navigate(['']);
+    this.router.navigate(['']).then(() => location.reload());
   }
 
   registerPlayer(): void {
-    
+    if (!this.formData.invalid) {
+      const data = {
+        name: this.formData.value.name,
+        email: this.formData.value.email,
+        phone: this.formData.value.phone,
+        type: this.formData.value.group,
+      };
+
+      this.playerService
+        .registerPlayer(data)
+        .pipe(
+          catchError((err) => {
+            return throwError(() => {
+              this.snackBar.open(`${err.error.details}`, 'Splash', {
+                duration: 3000,
+              });
+            });
+          })
+        )
+        .subscribe(() => {
+          this.snackBar.open('success', 'Splash', {
+            duration: 3000,
+          });
+        });
+    }
   }
 
   getErrorMessage(fieldName: string): string {
@@ -74,13 +101,13 @@ export class PlayerCreationComponent {
       return 'field required';
     }
     if (field?.hasError('email')) {
-      return 'field invalid'
-    } 
+      return 'field invalid';
+    }
     if (field?.hasError('maxlength') && field.errors) {
       const length = field.errors['maxlength'];
       return `field should be max length ${length.requiredLength}`;
     }
 
-    return 'field invalid';
+    return '';
   }
 }
