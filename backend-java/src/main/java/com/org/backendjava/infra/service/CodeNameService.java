@@ -26,8 +26,6 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class CodeNameService implements ICodeNameGateway {
 	@Autowired
-	private RestTemplate restTemplate;
-	@Autowired
 	private Environment environment;
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -56,6 +54,8 @@ public class CodeNameService implements ICodeNameGateway {
 	
 	@PostConstruct
 	private void loadAvengers() {
+		RestTemplate restTemplate = new RestTemplate();
+		
 		try {
 			String response = restTemplate.getForObject(environment.getProperty("avengers"), String.class);
 			JsonNode jsonNode = objectMapper.readTree(response);

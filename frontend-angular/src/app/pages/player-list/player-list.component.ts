@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { Player } from '../../model/player';
-import { PlayerService } from '../../service/player/player.service';
+import { PlayerService } from '../../service/player.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -15,6 +15,8 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { error } from 'console';
+import { nextTick } from 'process';
 
 @Component({
   selector: 'app-player-list',
@@ -35,7 +37,11 @@ export class PlayerListComponent implements OnInit {
   players: Player[] = [];
   columns = ['name', 'email', 'phone', 'codeName', 'playerGroup'];
 
-  constructor(private router: Router, private playerService: PlayerService, private snackBar: MatSnackBar) {}
+  constructor(
+    private router: Router,
+    private playerService: PlayerService,
+    private snackBar: MatSnackBar
+  ) {}
 
   registerPlayer(): void {
     this.router.navigate(['player_creation']);
@@ -45,17 +51,17 @@ export class PlayerListComponent implements OnInit {
     this.playerService
       .listPlayers()
       .pipe(
-        catchError((err) => {
-          return throwError(() => {
-            this.snackBar.open(`${err.error.message}`, 'Splash', {
-              duration: 3000,
-            });
-          });
-        })
+        catchError((err) =>
+          throwError(() => this.showMessage(err.error.message))
+        )
       )
-      .subscribe((res) => {
-        this.players = res.content;
-      });
+      .subscribe((players) => (this.players = players));
+  }
+
+  private showMessage(message: string) {
+    this.snackBar.open(message, 'Splash', {
+      duration: 3000,
+    });
   }
 
   ngOnInit(): void {

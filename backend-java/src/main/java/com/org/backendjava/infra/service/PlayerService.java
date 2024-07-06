@@ -9,9 +9,9 @@ import com.org.backendjava.adapter.ICodeNameGateway;
 import com.org.backendjava.adapter.IPlayerGateway;
 import com.org.backendjava.domain.dto.PlayerDto;
 import com.org.backendjava.domain.dto.PlayerView;
-import com.org.backendjava.domain.mapper.PlayerMapper;
 import com.org.backendjava.infra.entity.PlayerDB;
 import com.org.backendjava.infra.interfaces.repository.IPlayerRepository;
+import com.org.backendjava.infra.mapper.PlayerMapper;
 
 import jakarta.persistence.EntityNotFoundException;
 

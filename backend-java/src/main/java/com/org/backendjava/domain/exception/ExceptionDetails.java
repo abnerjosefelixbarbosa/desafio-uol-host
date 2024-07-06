@@ -5,6 +5,6 @@ import java.time.Instant;
 public record ExceptionDetails(
 		Instant instant,
 		Integer status,
-		String details,
+		String message,
 		String path
 ) {}

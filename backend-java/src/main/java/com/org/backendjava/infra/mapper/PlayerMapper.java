@@ -1,4 +1,4 @@
-package com.org.backendjava.domain.mapper;
+package com.org.backendjava.infra.mapper;
 
 import org.springframework.stereotype.Component;
 

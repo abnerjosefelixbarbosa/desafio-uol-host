@@ -20,7 +20,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { PlayerService } from '../../service/player/player.service';
+import { PlayerService } from '../../service/player.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -63,7 +63,7 @@ export class PlayerCreationComponent {
   ) {}
 
   listerPlayer(): void {
-    this.router.navigate(['']).then(() => location.reload());
+    this.router.navigate(['']);
   }
 
   registerPlayer(): void {
@@ -78,20 +78,21 @@ export class PlayerCreationComponent {
       this.playerService
         .registerPlayer(data)
         .pipe(
-          catchError((err) => {
-            return throwError(() => {
-              this.snackBar.open(`${err.error.details}`, 'Splash', {
-                duration: 3000,
-              });
-            });
-          })
+          catchError((err) =>
+            throwError(() => this.showMessage(err.error.message))
+          )
         )
         .subscribe(() => {
-          this.snackBar.open('success', 'Splash', {
-            duration: 3000,
-          });
+          this.showMessage('success');
+          this.router.navigate(['']);
         });
     }
+  }
+
+  private showMessage(message: string) {
+    this.snackBar.open(`${message}`, 'Splash', {
+      duration: 3000,
+    });
   }
 
   getErrorMessage(fieldName: string): string {
