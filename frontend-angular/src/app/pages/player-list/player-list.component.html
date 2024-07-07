@@ -3,40 +3,53 @@
     <span>OUL Host</span>
   </mat-toolbar>
   <section class="card">
-    <mat-card appearance="outlined" >
+    <mat-card appearance="outlined">
       <mat-card-content>
         <table mat-table [dataSource]="players" class="mat-elevation-z8">
-
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let player"> {{ player.name }} </td>
+            <td mat-cell *matCellDef="let player">{{ player.name }}</td>
           </ng-container>
 
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef>Email</th>
-            <td mat-cell *matCellDef="let player"> {{ player.email }} </td>
+            <td mat-cell *matCellDef="let player">{{ player.email }}</td>
           </ng-container>
 
           <ng-container matColumnDef="phone">
             <th mat-header-cell *matHeaderCellDef>Phone</th>
-            <td mat-cell *matCellDef="let player"> {{ player.phone }} </td>
+            <td mat-cell *matCellDef="let player">{{ player.phone }}</td>
           </ng-container>
 
           <ng-container matColumnDef="codeName">
             <th mat-header-cell *matHeaderCellDef>CodeName</th>
-            <td mat-cell *matCellDef="let player"> {{ player.codeName }} </td>
+            <td mat-cell *matCellDef="let player">{{ player.codeName }}</td>
           </ng-container>
 
           <ng-container matColumnDef="playerGroup">
             <th mat-header-cell *matHeaderCellDef>PlayerGroup</th>
-            <td mat-cell *matCellDef="let player"> {{ player.playerGroup }} </td>
+            <td mat-cell *matCellDef="let player">{{ player.playerGroup }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="*">
+            <th mat-header-cell *matHeaderCellDef>*</th>
+            <td mat-cell *matCellDef="let player">
+              <button mat-raised-button class="btn-delete" (click)="deletePlayerById(player.id)">
+                Delete
+              </button>
+              <button mat-raised-button class="btn-edite" (click)="updatePlayer(player)">
+                Edite
+              </button>
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="columns"></tr>
-          <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns"></tr>
         </table>
         <div class="btn-new-player">
-          <button mat-raised-button (click)="registerPlayer()">New Player</button>
+          <button mat-raised-button (click)="registerPlayer()">
+            New Player
+          </button>
         </div>
       </mat-card-content>
     </mat-card>

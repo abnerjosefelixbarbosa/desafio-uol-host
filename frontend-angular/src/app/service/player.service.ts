@@ -4,49 +4,38 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { api } from '../utils/api';
 
-export interface IPlayerService {
+interface IPlayerService {
   registerPlayer(data: any): Observable<Player>;
   listPlayers(): Observable<Player[]>;
   deletePlayerById(id: string): Observable<void>;
-  updatePlayer(id: string, player: Player): Observable<any>;
+  updatePlayer(id: string, player: Player): Observable<Player>;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlayerService implements IPlayerService {
-  private api: string = api.development;
-  private cache: BehaviorSubject<any> = new BehaviorSubject(null);
+  private url: string = api.development;
 
   constructor(private http: HttpClient) {}
 
   registerPlayer(data: any): Observable<Player> {
-    return this.http
-      .post<any>(`${this.api}/api/players/register-player`, data)
-      .pipe(map((res) => res));
+    return this.http.post<any>(`${this.url}/api/players/register-player`, data);
   }
 
   listPlayers(): Observable<Player[]> {
-    if (this.cache.getValue() !== null) {
-      return new Observable<any>((val) => {
-        val.next(this.cache.getValue());
-      }) 
-    }  
-    
-
-    return this.http.get<any>(`${this.api}/api/players/list-players`).pipe(
-      map((res) => {
-        this.cache.next(res.content);
-        return this.cache.getValue();
-      })
-    );
+    return this.http
+      .get<any>(`${this.url}/api/players/list-players`)
+      .pipe(map((res) => res.content));
   }
 
   deletePlayerById(id: string): Observable<void> {
-    throw new Error('Method not implemented.');
+    return this.http.delete<void>(
+      `${this.url}/api/players/delete-player-by-id?id=${id}`
+    );
   }
 
-  updatePlayer(id: string, player: Player): Observable<any> {
+  updatePlayer(id: string, player: Player): Observable<Player> {
     throw new Error('Method not implemented.');
   }
 }

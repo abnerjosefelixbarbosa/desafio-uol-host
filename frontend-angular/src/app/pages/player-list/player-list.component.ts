@@ -15,8 +15,6 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { error } from 'console';
-import { nextTick } from 'process';
 
 @Component({
   selector: 'app-player-list',
@@ -35,7 +33,9 @@ import { nextTick } from 'process';
 })
 export class PlayerListComponent implements OnInit {
   players: Player[] = [];
-  columns = ['name', 'email', 'phone', 'codeName', 'playerGroup'];
+  columns = ['name', 'email', 'phone', 'codeName', 'playerGroup', '*'];
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(
     private router: Router,
@@ -56,6 +56,21 @@ export class PlayerListComponent implements OnInit {
         )
       )
       .subscribe((players) => (this.players = players));
+  }
+
+  deletePlayerById(id: string): void {
+    this.playerService
+      .deletePlayerById(id)
+      .pipe(
+        catchError((err) =>
+          throwError(() => this.showMessage(err.error.message))
+        )
+      )
+      .subscribe(() => location.reload());
+  }
+
+  updatePlayer(data: Player): void {
+    console.log(data);
   }
 
   private showMessage(message: string) {

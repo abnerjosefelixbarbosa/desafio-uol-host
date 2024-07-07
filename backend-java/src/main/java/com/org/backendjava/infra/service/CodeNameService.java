@@ -31,36 +31,37 @@ public class CodeNameService implements ICodeNameGateway {
 	private ObjectMapper objectMapper;
 	private List<String> codenameAvengersList = new ArrayList<String>();
 	private List<String> codenameJusticeLeagueList = new ArrayList<String>();
-	
+
 	public String getCodenameByGroupType(GroupTypeDB type) {
 		String codename = "";
 		
+		if (codenameAvengersList.isEmpty() || codenameJusticeLeagueList.isEmpty()) {
+			loadAvengers();
+			loadJusticeLeague();
+		}
+
 		if (type.getType() == "AVENGERS") {
-			codename = codenameAvengersList
-					.parallelStream()
-					.findFirst()
+			codename = codenameAvengersList.parallelStream().findFirst()
 					.orElseThrow(() -> new EntityNotFoundException("code name not found"));
 			codenameAvengersList.remove(codename);
 		} else {
-			codename = codenameJusticeLeagueList
-					.parallelStream()
-					.findFirst()
+			codename = codenameJusticeLeagueList.parallelStream().findFirst()
 					.orElseThrow(() -> new EntityNotFoundException("code name not found"));
 			codenameJusticeLeagueList.remove(codename);
 		}
-		
+
 		return codename;
 	}
-	
+
 	@PostConstruct
 	private void loadAvengers() {
 		RestTemplate restTemplate = new RestTemplate();
-		
+
 		try {
 			String response = restTemplate.getForObject(environment.getProperty("avengers"), String.class);
 			JsonNode jsonNode = objectMapper.readTree(response);
 			ArrayNode nodes = (ArrayNode) jsonNode.get("vingadores");
-			
+
 			for (JsonNode i : nodes) {
 				codenameAvengersList.add(i.get("codinome").asText());
 			}
@@ -68,7 +69,7 @@ public class CodeNameService implements ICodeNameGateway {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
-	
+
 	@PostConstruct
 	private void loadJusticeLeague() {
 		try {
@@ -76,7 +77,7 @@ public class CodeNameService implements ICodeNameGateway {
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(environment.getProperty("justice.league"));
 			NodeList nodeList = document.getElementsByTagName("codinome");
-			
+
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Element element = (Element) nodeList.item(i);
 				String codename = element.getTextContent();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -23,6 +23,7 @@ import {
 import { PlayerService } from '../../service/player.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-player-creation',
@@ -38,6 +39,8 @@ import { throwError } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
   templateUrl: './player-creation.component.html',
   styleUrl: './player-creation.component.scss',
@@ -50,11 +53,15 @@ export class PlayerCreationComponent {
       Validators.email,
       Validators.maxLength(50),
     ]),
-    phone: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
     group: new FormControl('', [Validators.required]),
   });
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  phoneMask: string = ''
 
   constructor(
     private router: Router,
@@ -63,7 +70,7 @@ export class PlayerCreationComponent {
   ) {}
 
   listerPlayer(): void {
-    this.router.navigate(['']);
+    this.router.navigate(['']).then(() => location.reload());
   }
 
   registerPlayer(): void {
@@ -71,7 +78,7 @@ export class PlayerCreationComponent {
       const data = {
         name: this.formData.value.name,
         email: this.formData.value.email,
-        phone: this.formData.value.phone,
+        phone: this.getPhoneMask(),
         type: this.formData.value.group,
       };
 
@@ -83,10 +90,17 @@ export class PlayerCreationComponent {
           )
         )
         .subscribe(() => {
-          this.showMessage('success');
-          this.router.navigate(['']);
+          this.router.navigate(['']).then(() => location.reload());
         });
     }
+  }
+
+  setPhoneMask(phone: string) {
+    this.phoneMask = phone;
+  }
+
+  getPhoneMask() {
+    return this.phoneMask;
   }
 
   private showMessage(message: string) {
@@ -106,9 +120,9 @@ export class PlayerCreationComponent {
     }
     if (field?.hasError('maxlength') && field.errors) {
       const length = field.errors['maxlength'];
-      return `field should be max length ${length.requiredLength}`;
+      return `field not should be more than ${length.requiredLength}`;
     }
 
-    return '';
+    return 'field invalid';
   }
 }
