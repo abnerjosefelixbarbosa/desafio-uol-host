@@ -2,7 +2,7 @@
 
 ## About
 
-Desafio técnico uol host.
+UOL host technical challenge.
 
 ## Project resource
 
@@ -69,10 +69,10 @@ PUT
 
 # Project execution
 
-- Copie o repositório.
-- Importe o projeto em uma IDE Java.
-- Excute o projeto.
-- Acesse o [documento da API](http://localhost:8080/swagger-ui/index.html) ou use um plataforma para teste de API.
+- Copy the repository.
+- Import the project in a Java IDE.
+- Excute the project.
+- Access [API document](http://localhost:8080/swagger-ui/index.html) or use a platform for API testing.
 
 ```bash
 # clone repository
