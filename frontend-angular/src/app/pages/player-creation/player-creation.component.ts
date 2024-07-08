@@ -53,15 +53,12 @@ export class PlayerCreationComponent {
       Validators.email,
       Validators.maxLength(50),
     ]),
-    phone: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(20),
-    ]),
+    phone: new FormControl('', [Validators.required, Validators.maxLength(20)]),
     group: new FormControl('', [Validators.required]),
   });
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-  phoneMask: string = ''
+  phoneMask: string = '';
 
   constructor(
     private router: Router,
@@ -73,24 +70,23 @@ export class PlayerCreationComponent {
     this.router.navigate(['']).then(() => location.reload());
   }
 
-  registerPlayer(): void {
-    if (!this.formData.invalid) {
-      const data = {
-        name: this.formData.value.name,
-        email: this.formData.value.email,
-        phone: this.getPhoneMask(),
-        type: this.formData.value.group,
-      };
+  registerPlayer(data: FormGroup): void {
+    if (!data.invalid) {
+      data.value.phone = this.getPhoneMask();
 
       this.playerService
         .registerPlayer(data)
         .pipe(
-          catchError((err) =>
-            throwError(() => this.showMessage(err.error.message))
-          )
+          catchError((err) => {
+            return throwError(() => {
+              this.showMessage(err.error.message);
+            });
+          })
         )
         .subscribe(() => {
-          this.router.navigate(['']).then(() => location.reload());
+          this.router.navigate(['']).then(() => {
+            location.reload();
+          });
         });
     }
   }

@@ -20,7 +20,14 @@ export class PlayerService implements IPlayerService {
   constructor(private http: HttpClient) {}
 
   registerPlayer(data: any): Observable<Player> {
-    return this.http.post<any>(`${this.url}/api/players/register-player`, data);
+    const obj = {
+      name: data.value.name,
+      email: data.value.email,
+      phone: data.value.phone,
+      type: data.value.group,
+    };
+
+    return this.http.post<any>(`${this.url}/api/players/register-player`, obj);
   }
 
   listPlayers(): Observable<Player[]> {

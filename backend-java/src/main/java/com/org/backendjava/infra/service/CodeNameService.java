@@ -34,12 +34,6 @@ public class CodeNameService implements ICodeNameGateway {
 
 	public String getCodenameByGroupType(GroupTypeDB type) {
 		String codename = "";
-		
-		if (codenameAvengersList.isEmpty()) {
-			loadAvengers();
-		} else if (codenameJusticeLeagueList.isEmpty()) {
-			loadJusticeLeague();
-		}
 
 		if (type.getType() == "AVENGERS") {
 			codename = codenameAvengersList.parallelStream().findFirst()

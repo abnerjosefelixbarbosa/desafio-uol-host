@@ -51,9 +51,11 @@ export class PlayerListComponent implements OnInit {
     this.playerService
       .listPlayers()
       .pipe(
-        catchError((err) =>
-          throwError(() => this.showMessage(err.error.message))
-        )
+        catchError((err) => {
+          return throwError(() => {
+            this.showMessage(err.error.message);
+          });
+        })
       )
       .subscribe((players) => (this.players = players));
   }
@@ -62,15 +64,17 @@ export class PlayerListComponent implements OnInit {
     this.playerService
       .deletePlayerById(id)
       .pipe(
-        catchError((err) =>
-          throwError(() => this.showMessage(err.error.message))
-        )
+        catchError((err) => {
+          return throwError(() => {
+            this.showMessage(err.error.message);
+          });
+        })
       )
       .subscribe(() => location.reload());
   }
 
   updatePlayer(data: Player): void {
-    console.log(data);
+    this.router.navigate(['player_update'])
   }
 
   private showMessage(message: string) {
