@@ -77,8 +77,7 @@ export class PlayerListComponent implements OnInit {
     this.router.navigate(['player_update'], {
       queryParams: {
         id: data.id   
-      },
-      state: { data }
+      }
     })
   }
 

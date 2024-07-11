@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-player-update',
@@ -9,16 +9,16 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrl: './player-update.component.scss',
 })
 export class PlayerUpdateComponent {
-  value: string = '';
+  value: string = 'test';
 
   constructor(
     private activatedRoute: ActivatedRoute
   ) {}
 
   getValue() {
-    return this.value = this.activatedRoute
-      .snapshot
-      .queryParamMap
-      .get('id')!;
+    //return this.value = this.activatedRoute
+    //  .snapshot
+    //  .queryParamMap
+    //  .get('id')!;
   }
 }
