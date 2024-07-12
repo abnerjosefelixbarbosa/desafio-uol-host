@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.org.backendjava.domain.dto.PlayerDto;
-import com.org.backendjava.domain.dto.PlayerView;
-import com.org.backendjava.domain.interfaces.usercase.IPlayerUserCase;
+import com.org.backendjava.domain.usercase.IPlayerUserCase;
 
 import jakarta.validation.Valid;
 
@@ -31,16 +30,16 @@ public class PlayerController {
 
 	@PostMapping("/register-player")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ResponseEntity<PlayerView> registerPlayer(@Valid @RequestBody PlayerDto dto) {
-		PlayerView view = playerUserCase.registerPlayer(dto);
-		return ResponseEntity.status(201).body(view);
+	public ResponseEntity<PlayerDto> registerPlayer(@Valid @RequestBody PlayerDto dto) {
+		PlayerDto response = playerUserCase.registerPlayer(dto);
+		return ResponseEntity.status(201).body(response);
 	}
 	
 	@GetMapping("/list-players")
 	@ResponseStatus(code = HttpStatus.OK)
-	public ResponseEntity<Page<PlayerView>> listPlayers(Pageable pageable) {
-		Page<PlayerView> views = playerUserCase.listPlayers(pageable);
-		return ResponseEntity.status(200).body(views);
+	public ResponseEntity<Page<PlayerDto>> listPlayers(Pageable pageable) {
+		Page<PlayerDto> response = playerUserCase.listPlayers(pageable);
+		return ResponseEntity.status(200).body(response);
 	}
 	
 	@DeleteMapping("/delete-player-by-id")
@@ -52,8 +51,8 @@ public class PlayerController {
 	
 	@PutMapping("/update-player")
 	@ResponseStatus(code = HttpStatus.OK)
-	public ResponseEntity<PlayerView> updatePlayer(@RequestParam String id, @Valid @RequestBody PlayerDto dto) {
-		PlayerView view = playerUserCase.updatePlayer(id, dto);
-		return ResponseEntity.status(200).body(view);
+	public ResponseEntity<PlayerDto> updatePlayer(@RequestParam String id, @Valid @RequestBody PlayerDto dto) {
+		PlayerDto response = playerUserCase.updatePlayer(id, dto);
+		return ResponseEntity.status(200).body(response);
 	}
 }

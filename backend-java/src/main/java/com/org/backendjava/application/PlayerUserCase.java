@@ -7,19 +7,18 @@ import org.springframework.stereotype.Component;
 
 import com.org.backendjava.adapter.IPlayerGateway;
 import com.org.backendjava.domain.dto.PlayerDto;
-import com.org.backendjava.domain.dto.PlayerView;
-import com.org.backendjava.domain.interfaces.usercase.IPlayerUserCase;
+import com.org.backendjava.domain.usercase.IPlayerUserCase;
 
 @Component
 public class PlayerUserCase implements IPlayerUserCase {
 	@Autowired
 	private IPlayerGateway playerGateway;
 
-	public PlayerView registerPlayer(PlayerDto dto) {
+	public PlayerDto registerPlayer(PlayerDto dto) {
 		return playerGateway.registerPlayer(dto);
 	}
 
-	public Page<PlayerView> listPlayers(Pageable pageable) {
+	public Page<PlayerDto> listPlayers(Pageable pageable) {
 		return playerGateway.listPlayers(pageable);
 	}
 
@@ -27,7 +26,7 @@ public class PlayerUserCase implements IPlayerUserCase {
 		playerGateway.deletePlayerById(id);
 	}
 
-	public PlayerView updatePlayer(String id, PlayerDto dto) {
+	public PlayerDto updatePlayer(String id, PlayerDto dto) {
 		return playerGateway.updatePlayer(id, dto);
 	}	
 }

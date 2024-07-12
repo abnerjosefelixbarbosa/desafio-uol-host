@@ -1,4 +1,4 @@
-package com.org.backendjava.controller.exception;
+package com.org.backendjava.controller;
 
 import java.time.Instant;
 import java.util.HashMap;

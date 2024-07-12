@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record PlayerDto(
+		String id,
 		@NotNull(message = "not should be null")
 		@NotEmpty(message = "not should be empty")
 		@Length(max = 100, message = "not should be more than 100 characters")
@@ -22,6 +23,7 @@ public record PlayerDto(
 		@NotEmpty(message = "not should be empty")
 		@Length(max = 20, message = "not should be more than 20 characters")
 		String phone,
+		String codeName,
 		@NotNull(message = "not should be null")
 		GroupTypeDomain type
 ) {}
