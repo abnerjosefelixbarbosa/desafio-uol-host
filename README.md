@@ -58,7 +58,7 @@ GET
 
 ### Get player by id
 
-```
+```JSON
 GET
 /api/players/get-player-by-id?id=
 ```
