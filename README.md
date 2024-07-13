@@ -6,9 +6,16 @@ UOL host technical challenge.
 
 ## Project resource
 
+### Frontend angular
+
+- Angular.
+- TypeScript.
+- Matirial angular.
+- Ngx mask.
+
 ### Backend java
 
-- Java 17
+- Java 17.
 - Spring boot.
 - Clean arch.
 - SOLID.
@@ -22,6 +29,7 @@ UOL host technical challenge.
 - List players.
 - Delete player by id.
 - Update player.
+- get player by id.
 
 ## End points
 
@@ -32,10 +40,12 @@ POST
 /api/players/register-player
 
 {
+  "id": "string",
   "name": "string",
   "email": "string",
   "phone": "string",
-  "type": "AVENGERS"
+  "codeName": "string",
+  "playerGroup": "AVENGERS"
 }
 ```
 
@@ -44,6 +54,13 @@ POST
 ```JSON
 GET
 /api/players/list-players
+```
+
+### Get player by id
+
+```
+GET
+/api/players/get-player-by-id?id=
 ```
 
 ### Delete player by id
@@ -60,17 +77,19 @@ PUT
 /api/players/update-player?id=
 
 {
+  "id": "string",
   "name": "string",
   "email": "string",
   "phone": "string",
-  "type": "AVENGERS"
+  "codeName": "string",
+  "playerGroup": "AVENGERS"
 }
 ```
 
 # Project execution
 
 - Copy the repository.
-- Import the project in a Java IDE.
+- Import the project in a IDE.
 - Excute the project.
 - Access [API document](http://localhost:8080/swagger-ui/index.html) or use a platform for API testing.
 
