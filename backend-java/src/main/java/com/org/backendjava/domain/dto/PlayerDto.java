@@ -25,5 +25,5 @@ public record PlayerDto(
 		String phone,
 		String codeName,
 		@NotNull(message = "not should be null")
-		GroupTypeDomain type
+		GroupTypeDomain playerGroup
 ) {}

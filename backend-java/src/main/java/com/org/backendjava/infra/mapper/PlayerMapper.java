@@ -15,7 +15,7 @@ public class PlayerMapper {
 				player.getName(),
 				player.getEmail(),
 				player.getPhone(),
-				player.getEmail(),
+				player.getCodeName(),
 				GroupTypeDomain.valueOf(player.getPlayerGroup().getType())
 		);
 	}
@@ -26,7 +26,7 @@ public class PlayerMapper {
 				.name(dto.name())
 				.email(dto.email())
 				.phone(dto.phone())
-				.playerGroup(GroupTypeDB.valueOf(dto.type().getType().toString()))
+				.playerGroup(GroupTypeDB.valueOf(dto.playerGroup().getType().toString()))
 				.build();
 	}
 }
