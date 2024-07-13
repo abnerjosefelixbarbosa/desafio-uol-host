@@ -18,6 +18,10 @@ public class PlayerUserCase implements IPlayerUserCase {
 		return playerGateway.registerPlayer(dto);
 	}
 
+	public PlayerDto getPlayerById(String id) {
+		return playerGateway.getPlayerById(id);
+	}
+
 	public Page<PlayerDto> listPlayers(Pageable pageable) {
 		return playerGateway.listPlayers(pageable);
 	}

@@ -22,11 +22,12 @@ export class PlayerService implements IPlayerService {
 
   registerPlayer(data: Player): Observable<Player> {
     return this.http
-    .post<any>(`${this.url}/api/players/register-player`, data);
+      .post<any>(`${this.url}/api/players/register-player`, data);
   }
 
   getPlayerById(id: string): Observable<Player> {
-    throw new Error('Method not implemented.');
+    return this.http
+      .get<any>(`${this.url}/api/players/get-player-by-id?id=${id}`);
   }
 
   listPlayers(): Observable<Player[]> {
@@ -37,7 +38,7 @@ export class PlayerService implements IPlayerService {
 
   deletePlayerById(id: string): Observable<void> {
     return this.http
-    .delete<void>(`${this.url}/api/players/delete-player-by-id?id=${id}`);
+      .delete<void>(`${this.url}/api/players/delete-player-by-id?id=${id}`);
   }
 
   updatePlayer(id: string, player: Player): Observable<Player> {

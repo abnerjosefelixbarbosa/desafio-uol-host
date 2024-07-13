@@ -39,6 +39,12 @@ public class PlayerService implements IPlayerGateway {
 		
 		return playerMapper.toPlayerDto(player);
 	}
+	
+	public PlayerDto getPlayerById(String id) {
+		return playerRepository.findById(id)
+				.map(playerMapper::toPlayerDto)
+				.orElseThrow(() -> new EntityNotFoundException("id not found"));
+	}
 
 	public Page<PlayerDto> listPlayers(Pageable pageable) {
 		return playerRepository

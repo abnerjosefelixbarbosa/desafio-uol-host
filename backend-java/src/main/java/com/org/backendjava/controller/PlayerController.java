@@ -35,6 +35,13 @@ public class PlayerController {
 		return ResponseEntity.status(201).body(response);
 	}
 	
+	@GetMapping("/get-player-by-id")
+	@ResponseStatus(code = HttpStatus.OK)
+	public ResponseEntity<PlayerDto> getPlayerById(@RequestParam String id) {
+		PlayerDto response = playerUserCase.getPlayerById(id);
+		return ResponseEntity.status(200).body(response);
+	}
+	
 	@GetMapping("/list-players")
 	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseEntity<Page<PlayerDto>> listPlayers(Pageable pageable) {
