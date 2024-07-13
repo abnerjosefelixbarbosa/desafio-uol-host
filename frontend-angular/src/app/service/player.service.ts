@@ -42,6 +42,7 @@ export class PlayerService implements IPlayerService {
   }
 
   updatePlayer(id: string, player: Player): Observable<Player> {
-    throw new Error('Method not implemented.');
+    return this.http
+      .put<any>(`${this.url}/api/players/update-player?id=${id}`, player);
   }
 }

@@ -1,0 +1,31 @@
+.toolbar span {
+  color: white;
+}
+
+.toolbar {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card {
+  padding-top: 200px;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

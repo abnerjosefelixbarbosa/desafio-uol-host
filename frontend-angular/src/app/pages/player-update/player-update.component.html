@@ -1,1 +1,70 @@
-<p>{{ value }}</p>
+<main>
+  <mat-toolbar class="toolbar">
+    <span>OUL Host</span>
+  </mat-toolbar>
+  <section class="card">
+    <mat-card appearance="outlined">
+      <mat-card-content class="content">
+        <form [formGroup]="formData" class="example-form">
+          <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" #name type="text" />
+
+            @if(formData.get('name')?.invalid) {
+            <mat-error>
+              {{ getErrorMessage("name") }}
+            </mat-error>
+            }
+
+            <mat-hint align="end">{{ name.value.length || 0 }}/ 100</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" #email type="email" />
+
+            @if(formData.get('email')?.invalid) {
+            <mat-error>
+              {{ getErrorMessage("email") }}
+            </mat-error>
+            }
+
+            <mat-hint align="end">{{ email.value.length || 0 }}/ 50</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Phone</mat-label>
+            <input
+              matInput
+              formControlName="phone"
+              #phone
+              type="tel"
+              mask="(00) 00000-0000"
+            />
+
+            @if(formData.get('phone')?.invalid) {
+            <mat-error>
+              {{ getErrorMessage("phone") }}
+            </mat-error>
+            } @else {
+            {{ setPhoneMask(phone.value) }}
+            }
+          </mat-form-field>
+
+          <div class="btns">
+            <button
+              mat-raised-button
+              type="submit"
+              (click)="updatePlayer(formData)"
+            >
+              Update Player
+            </button>
+            <button mat-raised-button type="button" (click)="listPlayer()">
+              List Player
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</main>
