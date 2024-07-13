@@ -24,6 +24,7 @@ import { PlayerService } from '../../service/player.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { Player } from '../../model/player';
 
 @Component({
   selector: 'app-player-creation',
@@ -72,10 +73,18 @@ export class PlayerCreationComponent {
 
   registerPlayer(data: FormGroup): void {
     if (!data.invalid) {
-      data.value.phone = this.getPhoneMask();
+
+      const player: Player = {
+        id: null,
+        name: data.value.name,
+        email: data.value.email,
+        phone: this.getPhoneMask(),
+        codeName: null,
+        playerGroup: data.value.group
+      }
 
       this.playerService
-        .registerPlayer(data)
+        .registerPlayer(player)
         .pipe(
           catchError((err) => {
             return throwError(() => {

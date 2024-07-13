@@ -6,6 +6,7 @@ import { api } from '../utils/api';
 
 interface IPlayerService {
   registerPlayer(data: any): Observable<Player>;
+  getPlayerById(id: string): Observable<Player>;
   listPlayers(): Observable<Player[]>;
   deletePlayerById(id: string): Observable<void>;
   updatePlayer(id: string, player: Player): Observable<Player>;
@@ -19,15 +20,13 @@ export class PlayerService implements IPlayerService {
 
   constructor(private http: HttpClient) {}
 
-  registerPlayer(data: any): Observable<Player> {
-    const obj = {
-      name: data.value.name,
-      email: data.value.email,
-      phone: data.value.phone,
-      type: data.value.group,
-    };
+  registerPlayer(data: Player): Observable<Player> {
+    return this.http
+    .post<any>(`${this.url}/api/players/register-player`, data);
+  }
 
-    return this.http.post<any>(`${this.url}/api/players/register-player`, obj);
+  getPlayerById(id: string): Observable<Player> {
+    throw new Error('Method not implemented.');
   }
 
   listPlayers(): Observable<Player[]> {
@@ -37,9 +36,8 @@ export class PlayerService implements IPlayerService {
   }
 
   deletePlayerById(id: string): Observable<void> {
-    return this.http.delete<void>(
-      `${this.url}/api/players/delete-player-by-id?id=${id}`
-    );
+    return this.http
+    .delete<void>(`${this.url}/api/players/delete-player-by-id?id=${id}`);
   }
 
   updatePlayer(id: string, player: Player): Observable<Player> {
