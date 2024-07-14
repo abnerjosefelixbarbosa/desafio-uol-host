@@ -1,8 +1,12 @@
-# challenge-uol-host
+# Challenge uol host
 
 ## About
 
 UOL host technical challenge.
+
+### Model
+
+
 
 ## Project resource
 
@@ -29,7 +33,7 @@ UOL host technical challenge.
 - List players.
 - Delete player by id.
 - Update player.
-- get player by id.
+- Get player by id.
 
 ## End points
 
