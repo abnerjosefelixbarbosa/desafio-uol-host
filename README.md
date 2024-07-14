@@ -6,9 +6,7 @@ UOL host technical challenge.
 
 ### Model
 
-
-
-
+![host_UOL_class_diagram](https://github.com/user-attachments/assets/ff55984e-9ad8-4ed0-82ac-e261ed2b7f90)
 
 ## Project resource
 
