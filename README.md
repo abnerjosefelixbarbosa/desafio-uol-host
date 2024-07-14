@@ -2,7 +2,7 @@
 
 ## About
 
-UOL host technical challenge.
+Challenge technical UOL host.
 
 ## Model
 
