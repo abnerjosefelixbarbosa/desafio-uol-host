@@ -8,6 +8,10 @@ Challenge technical UOL host.
 
 ![host_UOL_class_diagram](https://github.com/user-attachments/assets/ff55984e-9ad8-4ed0-82ac-e261ed2b7f90)
 
+## Challenge link
+
+[link_challenge](https://github.com/uolhost/test-backEnd-Java)
+
 # Project resource
 
 ## Frontend angular
