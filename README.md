@@ -10,7 +10,7 @@ Challenge technical UOL host.
 
 ## Challenge link
 
-[link_challenge](https://github.com/uolhost/test-backEnd-Java)
+[link](https://github.com/uolhost/test-backEnd-Java)
 
 # Project resource
 
