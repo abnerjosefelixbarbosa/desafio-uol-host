@@ -2,7 +2,7 @@
 
 ## Sobre
 
-Desafio technical UOL host.
+Desafio técnico UOL host.
 
 ## Modelo
 
