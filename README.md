@@ -1,18 +1,18 @@
 # Challenge uol host
 
-## About
+## Sobre
 
-Challenge technical UOL host.
+Desafio technical UOL host.
 
-## Model
+## Modelo
 
 ![host_UOL_class_diagram](https://github.com/user-attachments/assets/ff55984e-9ad8-4ed0-82ac-e261ed2b7f90)
 
-## Challenge link
+## Link do desafio
 
 [link](https://github.com/uolhost/test-backEnd-Java)
 
-# Project resource
+# Recurso do projeto 
 
 ## Frontend angular
 
@@ -31,7 +31,7 @@ Challenge technical UOL host.
 - H2SQL.
 - JUnit 5.
 
-## Function
+## Funções
 
 - Register player.
 - List players.
@@ -39,7 +39,7 @@ Challenge technical UOL host.
 - Update player.
 - Get player by id.
 
-# End points
+# Requesições
 
 ## Register player
 
@@ -94,19 +94,19 @@ PUT
 }
 ```
 
-# Project execution
+# Execução do projeto
 
-- Copy the repository.
-- Import the project in a IDE.
-- Excute the project.
-- Access [API document](http://localhost:8080/swagger-ui/index.html) or use a platform for API testing.
+- Copie o repositório.
+- Importe o projeto em uma IDE.
+- Execute o projeto.
+- Accessese [a docmentação da API](http://localhost:8080/swagger-ui/index.html) ou use uma plataforma para testa a API.
 
 ```bash
 # clone repository
 git clone https://github.com/abnerjosefelixbarbosa/challenge-back-end-hit.git
 ```
 
-# Author
+# Autor
 
 Abner José Felix Barbosa
 
