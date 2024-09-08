@@ -99,7 +99,7 @@ PUT
 - Copie o repositório.
 - Importe o projeto em uma IDE.
 - Execute o projeto.
-- Accessese [a docmentação da API](http://localhost:8080/swagger-ui/index.html) ou use uma plataforma para testa a API.
+- Acesse [a docmentação da API](http://localhost:8080/swagger-ui/index.html) ou use uma plataforma para testa a API.
 
 ```bash
 # clone repository
