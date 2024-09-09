@@ -41,7 +41,7 @@ Desafio técnico UOL host.
 
 # Requesições
 
-## Register player
+## Registrar jogador
 
 ```JSON
 POST
@@ -57,28 +57,28 @@ POST
 }
 ```
 
-## List player
+## Listar jogador player
 
 ```JSON
 GET
 /api/players/list-players
 ```
 
-## Get player by id
+## Obter jogador pelo id
 
 ```JSON
 GET
 /api/players/get-player-by-id?id=
 ```
 
-## Delete player by id
+## Deletar jogador pelo id
 
 ```JSON
 DELETE
 /api/players/delete-player-by-id?id=
 ```
 
-## Update player
+## Atualizar jogador pelo id
 
 ```JSON
 PUT
@@ -96,10 +96,8 @@ PUT
 
 # Execução do projeto
 
-- Copie o repositório.
-- Importe o projeto em uma IDE.
-- Execute o projeto.
-- Acesse [a docmentação da API](http://localhost:8080/swagger-ui/index.html) ou use uma plataforma para testa a API.
+- Copie e execute repositório em uma IDE.
+- Acesse [a docmentação da API](http://localhost:8080/swagger-ui/index.html) ou use outra plataforma para testa a API.
 
 ```bash
 # clone repository
