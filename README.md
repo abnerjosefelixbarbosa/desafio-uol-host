@@ -31,13 +31,13 @@ Desafio técnico UOL host.
 - H2SQL.
 - JUnit 5.
 
-## Funções
+## Funcionalidades 
 
-- Register player.
-- List players.
-- Delete player by id.
-- Update player.
-- Get player by id.
+- Regirtrar jogador.
+- Listar jogadores.
+- Deletar jogador pelo id.
+- Atualizar jogador.
+- Obter jogador pelo id.
 
 # Requesições
 
